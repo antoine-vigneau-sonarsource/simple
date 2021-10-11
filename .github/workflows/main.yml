@@ -14,7 +14,6 @@ jobs:
         with:
           fetch-depth: 0
       - run:
-          docker pull sonarsource/sonar-scanner-cli:latest
           docker run --rm --user="$(id -u):$(id -g)" sonarsource/sonar-scanner-cli:latest -Dproject.settings=./sonar-project.properties
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
