@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branches:
+      - master # or the name of your main branch
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run:
+          docker run --rm --user="$(id -u):$(id -g)" -e SONAR_HOST_URL -e SONAR_TOKEN -v "/home/runner/work/simple/simple":"/usr/src" sonarsource/sonar-scanner-cli:latest -Dsonar.verbose=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
