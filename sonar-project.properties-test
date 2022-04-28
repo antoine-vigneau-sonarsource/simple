@@ -1,0 +1,5 @@
+sonar.projectKey=github-simple
+sonar.projectName=Simple (from GitHub)
+
+sonar.sources=src
+
